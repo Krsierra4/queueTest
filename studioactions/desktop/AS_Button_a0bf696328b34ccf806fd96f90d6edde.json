@@ -1,0 +1,31 @@
+{
+	"AS_Button_a0bf696328b34ccf806fd96f90d6edde": {
+		"id": "AS_Button_a0bf696328b34ccf806fd96f90d6edde",
+		"type": "ACTION_SEQUENCE",
+		"params": [
+			{
+				"datatype": "collection",
+				"name": "eventobject"
+			}
+		],
+		"contextObj": {
+			"type": "forms",
+			"platform": "",
+			"KUID": "dba8bcb5003b48eb858d647260b2d19a"
+		},
+		"language": "js",
+		"actions": [
+			{
+				"id": "INVOKE_FUNCTION__cf79a1b18c754ecd838317c4bf1709cf",
+				"type": "INVOKE_FUNCTION",
+				"sequenceKUID": "fillQeueue",
+				"display": "fillQeueue",
+				"inputparams": [],
+				"parentId": null,
+				"callbackType": null,
+				"disabled": null,
+				"source": "controller"
+			}
+		]
+	}
+}

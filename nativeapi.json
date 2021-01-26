@@ -1,0 +1,74 @@
+{
+    "Metadata": {
+        "Version": {
+            "iOS": "2.0"
+        }
+    },
+    "NativeFunctionAPI": {
+        "Android": {
+            "4.0": {
+                "Kony_FileStorage-Android-4.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_FileStorage-Android-4.0.zip",
+                    "isDefault": true,
+                    "os": "4.0",
+                    "platform": "Android",
+                    "title": "Kony_FileStorage"
+                },
+                "Kony_SDKCommons-Android-4.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_SDKCommons-Android-4.0.zip",
+                    "isDefault": true,
+                    "os": "4.0",
+                    "platform": "Android",
+                    "title": "Kony_SDKCommons"
+                },
+                "Kony_SyncV2-Android-4.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_SyncV2-Android-4.0.zip",
+                    "isDefault": true,
+                    "os": "4.0",
+                    "platform": "Android",
+                    "title": "Kony_SyncV2"
+                }
+            }
+        },
+        "iOS": {
+            "11.0": {
+                "Kony_FileStorage-iOS-11.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_FileStorage-iOS-11.0.zip",
+                    "isDefault": true,
+                    "nfiversion": "2.0",
+                    "os": "11.0",
+                    "platform": "iOS",
+                    "title": "Kony_FileStorage"
+                },
+                "Kony_SDKCommons-iOS-11.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_SDKCommons-iOS-11.0.zip",
+                    "isDefault": true,
+                    "nfiversion": "2.0",
+                    "os": "11.0",
+                    "platform": "iOS",
+                    "title": "Kony_SDKCommons"
+                },
+                "Kony_SyncV2-iOS-11.0": {
+                    "ci": true,
+                    "enable": true,
+                    "filename": "Kony_SyncV2-iOS-11.0.zip",
+                    "isDefault": true,
+                    "nfiversion": "2.0",
+                    "os": "11.0",
+                    "platform": "iOS",
+                    "title": "Kony_SyncV2"
+                }
+            }
+        }
+    }
+}
