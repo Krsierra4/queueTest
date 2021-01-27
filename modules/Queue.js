@@ -29,6 +29,16 @@ coned.utilities.queue = {
   },
 
   /**
+   * Adds an element at the front of the queue.
+   * @public
+   * @param {any} element
+   */
+  enqueueFront: function(element) {
+    this._elements.unshift(element);
+    return this;
+  },
+
+  /**
    * Dequeues the front element in the queue.
    * @public
    * @returns {any}
