@@ -39,10 +39,10 @@ coned.utilities.processQueue = {
                 }
                 const command = this.getCommand(action);
                 action.status = 'processing'
-                const result = await command.execute(); //TODO change data to send to command
+                const result = await command.execute(); //TODO change data to send to the command
                 resolve(result);
-            } catch (e) {
-                reject(e);
+            } catch (error) {
+                reject(error);
             }
         });
     },
