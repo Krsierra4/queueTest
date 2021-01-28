@@ -4,7 +4,12 @@ coned.utilities.processQueue = coned.utilities.processQueue || {};
 coned.utilities.processQueue = {
 
     init: function () {
-        actionQueue = coned.utilities.queue.fromArray([]);
+        let dataQueue = [];
+        const queue = coned.utilities.queue.getSavedQueue();
+        if (Array.isArray(queue) && queue.length > 0) {
+            dataQueue = queue;
+        }
+        actionQueue = coned.utilities.queue.fromArray(dataQueue);
     },
 
     getQueue: function () {
@@ -77,6 +82,5 @@ coned.utilities.processQueue = {
     },
     processAuto: function (value) {
         coned.utilities.processQueue.automatic = value;
-    }
-
+    },
 };

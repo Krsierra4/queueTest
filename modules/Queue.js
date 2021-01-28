@@ -1,9 +1,8 @@
-// /**
-//  * @license MIT
-//  * @copyright 2020 Eyas Ranjous <eyas.ranjous@gmail.com>
-//  *
-//  * @class
-//  */
+/**
+* @license MIT
+* @copyright 2020 Eyas Ranjous <eyas.ranjous@gmail.com>
+*
+*/
 var coned = coned || {};
 coned.utilities = coned.utilities || {};
 coned.utilities.queue = coned.utilities.queue || {};
@@ -25,6 +24,7 @@ coned.utilities.queue = {
    */
   enqueue: function(element) {
     this._elements.push(element);
+    this.saveQueue(this._elements);
     return this;
   },
 
@@ -35,7 +35,14 @@ coned.utilities.queue = {
    */
   enqueueFront: function(element) {
     this._elements.unshift(element);
+    this.saveQueue(this._elements);
     return this;
+  },
+
+  enqueueArrayFront: function(elements) {
+    const newQueue = elements.concat(this._elements);
+    this._elements = newQueue;
+    this.saveQueue(newQueue);
   },
 
   /**
@@ -54,6 +61,7 @@ coned.utilities.queue = {
     // only remove dequeued elements when reaching half size
     // to decrease latency of shifting elements.
     this._elements = this._elements.slice(this._offset);
+    this.saveQueue(this._elements);
     this._offset = 0;
     return first;
   },
@@ -129,9 +137,21 @@ coned.utilities.queue = {
    * @return {Queue}
    */
   fromArray(elements) {
-    //return new Queue(elements);
-    this._elements = Array.isArray(elements) ? elements : [];
     this._offset = 0;
+    this._elements = Array.isArray(elements) ? elements : [];
+    this.saveQueue(this._elements);
+  },
+
+  saveQueue(queue) {
+    // const stringQ = JSON.stringify(queue);
+    const stringQ = queue;
+    kony.store.setItem('commandsQueue', stringQ);
+  }, 
+
+  getSavedQueue() {
+    const stringQ = kony.store.getItem('commandsQueue'); // TODO rerturn an empty array if doesnt exist queue
+    // return JSON.parse(stringQ);
+    return stringQ;
   }
 }
 
