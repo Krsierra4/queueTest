@@ -1,7 +1,6 @@
 {
     "@class": "com.kony.gen.viz.model.container.KVizSegment2",
     "DNDConfig": null,
-    "__parentReadjusting__": false,
     "_data_": [
         {
             "lblId": {

@@ -77,8 +77,9 @@ define({
             id: uuidv4().substr(0, 4),
             type: availableActionTypes[action],
             duration: duration,
-            status: 'idle'
-        }
+            status: 'idle',
+           // eventListener: 'someNameFunction_fail' //TODO implement this functionality
+         }
     },
     
     updateSegment:function(){
