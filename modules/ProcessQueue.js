@@ -32,6 +32,8 @@ coned.utilities.processQueue = {
             handler = new CreateDataCommand();
         } else if (action.type === 'wait') {
             handler = new WaitCommand(action.duration);
+        } else if (action.type === 'get') {
+            handler = new GetDataCommand(action.duration);
         }
         return handler;
     },
@@ -43,8 +45,8 @@ coned.utilities.processQueue = {
                     resolve(null);
                 }
                 const command = this.getCommand(action);
-                action.status = 'processing'
-                const result = await command.execute(); //TODO change data to send to the command
+                // action.status = 'processing';
+                const result = await command.execute(); //TODO make same response
                 resolve(result);
             } catch (error) {
                 reject(error);
@@ -55,20 +57,19 @@ coned.utilities.processQueue = {
     processAction: function () {
         return new Promise(async (resolve, reject) => {
             try {
-                const action = coned.utilities.queue.front();
-                if (!action) {
+                let actionProcessed = coned.utilities.queue.front();
+                if (!actionProcessed) {
                     resolve(null);
                 }
-                amplify.publish("processingQueueElement", action);
-                const result = await this._processAction(action);
-                if (result) {
-                    coned.utilities.queue.dequeue();
-                    amplify.publish("processedQueueElement", action);
-                    resolve(true);
-                } else {
-                    amplify.publish("processingQueueElementFailed", action);
-                    reject(false);
+                amplify.publish("processingQueueElement", actionProcessed);
+                const result = await this._processAction(actionProcessed);
+                actionProcessed.result = result;
+                coned.utilities.queue.dequeue();
+                amplify.publish("processedQueueElement", actionProcessed);
+                if (actionProcessed.hasOwnProperty('eventListener')) {
+                    amplify.publish(actionProcessed.eventListener, actionProcessed);
                 }
+                resolve();
             } catch (e) {
                 reject(e);
             }

@@ -1,3 +1,4 @@
+//!! don't return errors in resolve() only reject()
 class SyncObjectCommand {
     constructor(objectName) {
         this.objectName = typeof objectName === 'string' ? objectName : null;
@@ -23,11 +24,12 @@ class CreateDataCommand {
 }
 
 class GetDataCommand {
-    constructor(objectName) {
-        this.objectName = objectName;
+    constructor(duration) {
+        this.duration = duration;
     }
 
     execute() {
+        const self = this;
         return new Promise(function(resolve, reject) {
             try {
                 kony.timer.schedule("someTimer:GetDataCommand",()=>{
@@ -39,7 +41,7 @@ class GetDataCommand {
                         LastUpdate: "2021-01-28T16:56:23.505Z"
                     };
                     resolve(data);
-                }, 5, false);
+                }, self.duration, false);
             } catch (error) {
                 reject(error);
             }
