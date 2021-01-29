@@ -7,6 +7,11 @@ define({
         var self = this;
         this.processAll();
     },
+    /** onClick defined for Button0j07bbef1afcb4a **/
+    AS_Button_be00e83af89345d8845e09394a4cfb34: function AS_Button_be00e83af89345d8845e09394a4cfb34(eventobject) {
+        var self = this;
+        return self.generateGetAction.call(this);
+    },
     /** onClick defined for btnProcessOne **/
     AS_Button_c3b5be63e6aa40ddb3c1393aadf3cac5: function AS_Button_c3b5be63e6aa40ddb3c1393aadf3cac5(eventobject) {
         var self = this;

@@ -62,24 +62,79 @@ define({
         return Math.floor( Math.random() * ( max - min + 1 ) + min );
     },
     
+    generateUniqueId: function() {
+        const uuidv4 = function () {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+              return v.toString(16);
+            });
+        };
+        return uuidv4().substr(0, 4);
+    },
+
     generateRandomAction: function(){
-        const availableActionTypes = ['sync', 'save', 'wait']; //TODO check line looks important 
+        const availableActionTypes = ['sync', 'save', 'wait'];
         const duration = this.randomIntFromInterval(1, 5);
         const action = this.randomIntFromInterval(0, 2);
-        const uuidv4 = function () {
-          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-          });
-        }
+        
         
         return {
-            id: uuidv4().substr(0, 4),
+            id: this.generateUniqueId(),
             type: availableActionTypes[action],
             duration: duration,
             status: 'idle',
-           // eventListener: 'someNameFunction_fail' //TODO implement this functionality
          }
+    },
+
+    generateGetAction: function() {
+        const events = this.generateActionEvents();
+        const newAction = {
+            id: this.generateUniqueId(),
+            type: 'get',
+            duration: 5,
+            status: 'idle',
+            eventListener: events.eventSuccess,
+            eventListenerFail: events.eventFail
+        };
+
+        coned.utilities.processQueue.enqueue(newAction);
+        this.updateSegment();
+    },
+
+    generateActionEvents() {
+        const _id = this.generateUniqueId();
+        const eventName = `event_${_id}`;
+        const eventNameFail = `${eventName}_fail`;
+
+        amplify.subscribe(
+			eventName,
+			this,
+			function(action) {
+                if (action !== null && action.hasOwnProperty('result')) {
+                    console.log('success');
+                    console.log(action.result);
+                    amplify.unsubscribe(action.eventListener);
+                }
+            },
+			1
+		);
+        amplify.subscribe(
+			eventNameFail,
+			this,
+			function(actionFail) {
+                if (actionFail !== null && actionFail.hasOwnProperty('error')) {
+                    console.log('error');
+                    console.log(actionFail.error);
+                    amplify.unsubscribe(action.eventListenerFail);
+                }
+            },
+			1
+        );
+
+        return {
+            eventSuccess: eventName,
+            eventFail: eventNameFail
+        }
     },
     
     updateSegment:function(){
@@ -93,7 +148,13 @@ define({
         this.updateSegment();
     },
     handleProcessedElement:function (action){
-        this.log('Finished action id: ' + action.id);
+        if (action.type === 'get' && action.hasOwnProperty('result')) {
+            const data = JSON.stringify(action.result);
+            this.log('Action data returned: ' + data);
+            this.log('Finished action id: ' + action.id);
+        } else {
+            this.log('Finished action id: ' + action.id);
+        }
         this.updateSegment();
     },
     log:function(logtext){
