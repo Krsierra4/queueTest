@@ -5,11 +5,13 @@ coned.utilities.processPriorityQueue = {
 
     _priorityQueue: null,
     queueStoreName: 'priorityCommandsQueue',
+    actionStoreName: 'priorityActionQueue',
 
     init: function () {
         if (this._priorityQueue !== null) return;
         this._priorityQueue = new MaxPriorityQueue({ priority: (action) => action.priority });
-        this.checkPendingActions();
+        this.checkPendingQueue();
+        this.checkPendingAction();
     },
 
     getQueue: function () {
@@ -70,8 +72,12 @@ coned.utilities.processPriorityQueue = {
                 }
                 this._priorityQueue.dequeue();
                 this.saveCurrentQueue();
+                element.status = 'inProgress';
+                this.saveCurrentAction(element);
                 amplify.publish("processingQueueElement", element);
                 const result = await this._processAction(element);
+                element.status = 'finished';
+                this.saveCurrentAction(element);
                 element.result = result;
                 amplify.publish("processedQueueElement", element);
                 if (element.hasOwnProperty('eventListener')) {
@@ -95,15 +101,34 @@ coned.utilities.processPriorityQueue = {
         kony.store.setItem(this.queueStoreName, currentQueue);
     },
 
+    saveCurrentAction: function(action) {
+        kony.store.setItem(this.actionStoreName, action);
+    },
+
     getStoredQueue: function() {
         const storedQueue = kony.store.getItem(this.queueStoreName) || [];
         return storedQueue;
     },
 
-    checkPendingActions: function() {
+    getStoredAction: function() {
+        const storedAction = kony.store.getItem(this.actionStoreName) || {};
+        return storedAction;
+    },
+
+    checkPendingQueue: function() {
         const data = this.getStoredQueue();
         if (Array.isArray(data) && data.length > 0) {
             for (const action of data) {
+                this.enqueue(action);
+            }
+        }
+    },
+
+    checkPendingAction: function() {
+        const action = this.getStoredAction();
+        if (action !== null && action.hasOwnProperty('status') && action.hasOwnProperty('priority')) {
+            if (action.status === 'inProgress') {
+                action.priority = 5;
                 this.enqueue(action);
             }
         }
