@@ -3,19 +3,35 @@
     "DNDConfig": null,
     "_data_": [
         {
-            "lblId": {
+            "TimeAction": {
                 "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
                 "text": ""
             },
-            "lblStatus": {
+            "idAction": {
                 "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
                 "text": ""
             },
-            "lblStrip": {
+            "idValue": {
                 "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
                 "text": ""
             },
-            "lblType": {
+            "priorityAction": {
+                "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
+                "text": ""
+            },
+            "priorityValue": {
+                "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
+                "text": ""
+            },
+            "timeValue": {
+                "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
+                "text": ""
+            },
+            "typeAction": {
+                "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
+                "text": ""
+            },
+            "typeValue": {
                 "@class": "com.viz.ide.model.segment.SimpleTextSegmentData",
                 "text": ""
             }
@@ -87,11 +103,11 @@
     "retaincontentalignment": false,
     "retainflexpositionproperties": false,
     "retainselection": false,
-    "rowTemplateId": "e4dd6311f36d47b3ae43fbb49cfddccd",
+    "rowTemplateId": "cdf6d3411b9d427da91e15e088514916",
     "rowcounter": 0,
     "rowfocusskin": "sf020213f95b4a7ea2ff7d8e5eabc8b5",
     "rowskin": "s6a9754adddd42f58350f70849e7c608",
-    "rowtemplate": "CopyflxSampleRowTemplate0cf8548138ca846",
+    "rowtemplate": "Flex0f4c5421ede7547",
     "screenlevelwidget": false,
     "seccounter": 0,
     "sectionheaderskin": "s410d4526d9b41a8aa3a42dcd473a5c8",
@@ -100,7 +116,7 @@
     "selectedindex": null,
     "selectedindices": null,
     "selecteditems": null,
-    "selectedsectionindex": 0,
+    "selectedsectionindex": null,
     "selectionbehavior": "default",
     "separatorcolor": "aaaaaa00",
     "separatorrequired": true,
@@ -111,10 +127,14 @@
     "wType": "Segment",
     "widgetalignment": 5,
     "widgetdatamap": {
-        "CopyflxSampleRowTemplate0cf8548138ca846": "CopyflxSampleRowTemplate0cf8548138ca846",
-        "lblId": "lblId",
-        "lblStatus": "lblStatus",
-        "lblStrip": "lblStrip",
-        "lblType": "lblType"
+        "Flex0f4c5421ede7547": "Flex0f4c5421ede7547",
+        "TimeAction": "TimeAction",
+        "idAction": "idAction",
+        "idValue": "idValue",
+        "priorityAction": "priorityAction",
+        "priorityValue": "priorityValue",
+        "timeValue": "timeValue",
+        "typeAction": "typeAction",
+        "typeValue": "typeValue"
     }
 }

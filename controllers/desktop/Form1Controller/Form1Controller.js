@@ -16,9 +16,8 @@ define({
 
     //App logic
     setupActions:function(){
-//         this.view.btnFillQueue.onClick = this.fillQueue;
-//         this.view.btnProcessOne.onClick = this.processOne;
-        coned.utilities.processQueue.init();
+        // coned.utilities.processPriorityQueue.init();
+        coned.utilities.processPriorityQueue.init();
     },
     
     setupListeners:function(){
@@ -42,9 +41,10 @@ define({
     setupSegment:function(){
         const segment = this.view.sgmQueue;
         segment.widgetDataMap = {
-            lblId:"id", 
-            lblType:"type", 
-            lblStatus:"status"
+            idValue: "id", 
+            typeValue:"type", 
+            timeValue: "duration",
+            priority: "priority"
 		};
     },
     
@@ -53,7 +53,7 @@ define({
         for( let i = 0; i < actionsToGenerate; i++ ){
             const randomAction = this.generateRandomAction();
             kony.print(randomAction);
-            coned.utilities.processQueue.enqueue(randomAction);
+            coned.utilities.processPriorityQueue.enqueue(randomAction);
         }
         this.updateSegment();
     },
@@ -74,15 +74,16 @@ define({
 
     generateRandomAction: function(){
         const availableActionTypes = ['sync', 'save', 'wait'];
-        const duration = this.randomIntFromInterval(1, 5);
+        const duration = this.randomIntFromInterval(1, 3);
         const action = this.randomIntFromInterval(0, 2);
-        
+        const priority = this.randomIntFromInterval(1, 3);
         
         return {
             id: this.generateUniqueId(),
             type: availableActionTypes[action],
             duration: duration,
             status: 'idle',
+            priority: priority
          }
     },
 
@@ -93,11 +94,12 @@ define({
             type: 'get',
             duration: 5,
             status: 'idle',
+            priority: 4,
             eventListener: events.eventSuccess,
             eventListenerFail: events.eventFail
         };
 
-        coned.utilities.processQueue.enqueue(newAction);
+        coned.utilities.processPriorityQueue.enqueue(newAction);
         this.updateSegment();
     },
 
@@ -138,13 +140,13 @@ define({
     },
     
     updateSegment:function(){
-        const queue = coned.utilities.processQueue.getQueue();
+        const queue = coned.utilities.processPriorityQueue.getQueue();
 		const segment = this.view.sgmQueue;
         segment.setData(queue);
         this.view.forceLayout();
     },
     handleProcessingElement:function (action){
-        this.log('Processing action id: ' + action.id + ' Type: ' + action.type + ' duration: ' + action.duration);
+        this.log('Processing action id: ' + action.id + ' Type: ' + action.type + ' priority: ' + action.priority + ' duration: ' + action.duration);
         this.updateSegment();
     },
     handleProcessedElement:function (action){
@@ -164,18 +166,18 @@ define({
         textArea.text = text;
     },
     processOne:function(){
-        if(coned.utilities.queue.isEmpty()){
+        if(coned.utilities.processPriorityQueue.isEmpty()){
             this.log('Queue is empty ...');
             return;
         }
-        coned.utilities.processQueue.processAction();
+        coned.utilities.processPriorityQueue.processAction();
     },
     processAll:function(){
-        if(coned.utilities.queue.isEmpty()){
+        if(coned.utilities.processPriorityQueue.isEmpty()){
             this.log('Queue is empty ...');
             return;
         }
-        coned.utilities.processQueue.processAll();
+        coned.utilities.processPriorityQueue.processAll();
     },
 	clear:function(){
         const textArea = this.view.txtAreaProcessLog;

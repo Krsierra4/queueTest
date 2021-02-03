@@ -1,7 +1,6 @@
 {
     "@class": "com.kony.gen.viz.model.component.KVizLabel",
     "DNDConfig": null,
-    "__parentReadjusting__": false,
     "_bottom_": {
         "type": "string",
         "value": "10%"
@@ -28,13 +27,9 @@
     ],
     "_skin_": "s75d38934ca74897bc99c5b4270ed150",
     "_text_": "Action Type",
-    "_top_": {
-        "type": "string",
-        "value": "42%"
-    },
     "_width_": {
         "type": "string",
-        "value": "70%"
+        "value": "45%"
     },
     "_wrapping_": 2,
     "canUpdateUI": true,

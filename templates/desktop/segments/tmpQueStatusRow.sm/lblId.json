@@ -1,7 +1,6 @@
 {
     "@class": "com.kony.gen.viz.model.component.KVizLabel",
     "DNDConfig": null,
-    "__parentReadjusting__": false,
     "_height_": {
         "type": "ref",
         "value": "preferred"
@@ -26,7 +25,7 @@
     "_text_": "Action Id",
     "_top_": {
         "type": "string",
-        "value": "8.00%"
+        "value": "8%"
     },
     "_width_": {
         "type": "string",

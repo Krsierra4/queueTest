@@ -2,7 +2,7 @@
     "DNDConfig": null,
     "_height_": {
         "type": "string",
-        "value": "75dp"
+        "value": "100dp"
     },
     "_margin_": [
         0,
@@ -25,8 +25,7 @@
     "children": [
         "lblId",
         "lblType",
-        "lblStatus",
-        "lblStrip"
+        "lblStatus"
     ],
     "clipbounds": true,
     "containerId": true,
@@ -43,7 +42,7 @@
     "isTemplate": true,
     "isvisible": true,
     "kuid": "a5394f5f3c7d463795ee46dfb1ceaf43",
-    "layouttype": 2,
+    "layouttype": 4,
     "name": "kony.ui.FlexContainer",
     "parent": "tmpQueStatusRow",
     "pf": "tmpQueStatusRow",

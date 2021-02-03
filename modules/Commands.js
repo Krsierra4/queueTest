@@ -1,24 +1,32 @@
 //!! don't return errors in resolve() only reject()
 class SyncObjectCommand {
-    constructor(objectName) {
-        this.objectName = typeof objectName === 'string' ? objectName : null;
+    constructor(duration) {
+        this.duration = duration;
     }
 
-    execute(syncOptions) {
+    execute() {
+        const self = this;
         return new Promise(function (resolve, reject) {
-            resolve(true);
+            kony.timer.schedule("SyncObjectCommand:timer",()=>{
+                kony.print('SyncObjectCommand:execute');
+                resolve(true);
+            }, self.duration, false);
         });
     }
 }
 
 class CreateDataCommand {
-    constructor(objectName) {
-        this.objectName = typeof objectName === 'string' ? objectName : null;
+    constructor(duration) {
+        this.duration = duration;
     }
 
-    execute(data, options) {
+    execute() {
+        const self = this;
         return new Promise(function (resolve, reject) {
-            resolve(true);
+            kony.timer.schedule("CreateDataCommand:timer",()=>{
+                kony.print('CreateDataCommand:execute');
+                resolve(true);
+            }, self.duration, false);
         });
     }
 }
@@ -32,7 +40,7 @@ class GetDataCommand {
         const self = this;
         return new Promise(function(resolve, reject) {
             try {
-                kony.timer.schedule("someTimer:GetDataCommand",()=>{
+                kony.timer.schedule("GetDataCommand:timer",()=>{
                     kony.print('GetDataCommand:execute');
                     const data = {
                         BoroughId: '11ACG',
@@ -58,7 +66,7 @@ class WaitCommand {
         const self = this;
         return new Promise(function(resolve, reject) {
             try {
-                kony.timer.schedule("someTimer:WaitCommand",()=>{
+                kony.timer.schedule("WaitCommand:timer",()=>{
                     kony.print('WaitCommand:execute');
                     resolve(true);
                 }, self.duration, false);

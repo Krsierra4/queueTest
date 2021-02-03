@@ -1,10 +1,13 @@
 {
     "@class": "com.kony.gen.viz.model.component.KVizLabel",
     "DNDConfig": null,
-    "__parentReadjusting__": false,
     "_height_": {
         "type": "ref",
         "value": "preferred"
+    },
+    "_left_": {
+        "type": "string",
+        "value": "3.94%"
     },
     "_margin_": [
         1,
@@ -19,15 +22,11 @@
         0
     ],
     "_right_": {
-        "type": "string",
-        "value": "9%"
+        "type": "number",
+        "value": "0"
     },
     "_skin_": "s72f5d68abba4a29b414595cf0a6ace2",
     "_text_": "Status",
-    "_top_": {
-        "type": "string",
-        "value": "10%"
-    },
     "_width_": {
         "type": "ref",
         "value": "preferred"

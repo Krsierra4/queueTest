@@ -15,7 +15,7 @@
         0
     ],
     "_percent_": true,
-    "_skin_": "s04aa0f65d7a476a9950185a998aa48d",
+    "_skin_": "sff8ee2fc78e4c45a144a766e6090054",
     "_title_": null,
     "addWidgetsdone": false,
     "allboxes": [],
@@ -33,34 +33,36 @@
     "canUpdateUI": true,
     "canvasWidth": 1200,
     "children": [
-        "CopyflxSampleRowTemplate0cf8548138ca846"
+        "Flex0f4c5421ede7547"
     ],
     "containerId": true,
     "containerweight": 100,
     "currentLocale": "default",
-    "device": "kiosk",
+    "device": "desktopweb",
     "displayorientation": 3,
     "enabledforidletimeout": false,
-    "id": "tmpQueStatusRow",
+    "id": "Temp0ec8c5711bb4342",
     "info": null,
     "initdone": false,
     "inputaccessoryviewtype": 4,
     "intransitionconfig": {
         "formTransition": "None"
     },
+    "iscustomlayout": false,
     "isvisible": true,
-    "kuid": "e4dd6311f36d47b3ae43fbb49cfddccd",
+    "kuid": "cdf6d3411b9d427da91e15e088514916",
     "name": "kony.ui.Form2",
     "needappmenu": true,
     "outtransitionconfig": {
         "formTransition": "None"
     },
     "paddinginpixel": false,
-    "platform": "kiosk",
+    "platform": "desktopweb",
     "prevDevice": "desktopweb",
     "prevPlatform": "desktopweb",
+    "retaincontentalignment": false,
+    "retainflexpositionproperties": false,
     "retainscrollposition": false,
-    "titleBarSkin": "s1e83989032d483380543c4a1dc594f6",
     "titlebar": true,
     "type": 3,
     "wType": "Form"

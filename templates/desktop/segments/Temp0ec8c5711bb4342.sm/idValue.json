@@ -7,7 +7,7 @@
     },
     "_left_": {
         "type": "string",
-        "value": "512dp"
+        "value": "90dp"
     },
     "_margin_": [
         1,
@@ -21,11 +21,11 @@
         0,
         0
     ],
-    "_skin_": "s26d519602e244ecb4a2d43effda570d",
-    "_text_": "Automatic",
+    "_skin_": "s9fa689fdc264d23830610d1d3b8ef65",
+    "_text_": "value",
     "_top_": {
         "type": "string",
-        "value": "325dp"
+        "value": "10dp"
     },
     "_width_": {
         "type": "ref",
@@ -41,7 +41,7 @@
     "canUpdateUI": true,
     "containerweight": 100,
     "contentalignment": 4,
-    "id": "Label0ba151fb7939548",
+    "id": "idValue",
     "info": null,
     "ipad": {
         "psp": {
@@ -54,11 +54,11 @@
         }
     },
     "iscustomlayout": false,
-    "isvisible": false,
-    "kuid": "b6f3ac7507c548859e3dd6ce2b744131",
+    "isvisible": true,
+    "kuid": "e67c7ddcd6e34f078b464e32fe509f3b",
     "name": "kony.ui.Label",
-    "parent": "Form1",
-    "pf": "Form1",
+    "parent": "Flex0f4c5421ede7547",
+    "pf": "Temp0ec8c5711bb4342",
     "retaincontentalignment": false,
     "retainflexpositionproperties": false,
     "tooltip": "",
