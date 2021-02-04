@@ -32,8 +32,9 @@ class CreateDataCommand {
 }
 
 class GetDataCommand {
-    constructor(duration) {
+    constructor(duration, count) {
         this.duration = duration;
+        this.count = count;
     }
 
     execute() {
@@ -42,13 +43,16 @@ class GetDataCommand {
             try {
                 kony.timer.schedule("GetDataCommand:timer",()=>{
                     kony.print('GetDataCommand:execute');
-                    const data = {
-                        BoroughId: '11ACG',
-                        Borough: 'some name',
-                        DeleteFlag: 0,
-                        LastUpdate: "2021-01-28T16:56:23.505Z"
-                    };
-                    resolve(data);
+                    if (self.count === 2) {
+                        const data = {
+                            BoroughId: '11ACG',
+                            Borough: 'some name',
+                            DeleteFlag: 0,
+                            LastUpdate: "2021-01-28T16:56:23.505Z"
+                        };
+                        resolve(data);
+                    }
+                    reject('Custom error!!');
                 }, self.duration, false);
             } catch (error) {
                 reject(error);
