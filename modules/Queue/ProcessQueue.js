@@ -66,8 +66,8 @@ coned.utilities.processQueue = {
                 actionProcessed.result = result;
                 coned.utilities.queue.dequeue();
                 amplify.publish("processedQueueElement", actionProcessed);
-                if (actionProcessed.hasOwnProperty('eventListener')) {
-                    amplify.publish(actionProcessed.eventListener, actionProcessed);
+                if (actionProcessed.hasOwnProperty('eventListenerSuccess')) {
+                    amplify.publish(actionProcessed.eventListenerSuccess, actionProcessed);
                 }
                 resolve();
             } catch (e) {
