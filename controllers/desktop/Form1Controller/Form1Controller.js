@@ -95,7 +95,7 @@ define({
             duration: 5,
             status: 'idle',
             priority: 4,
-            eventListener: events.eventSuccess,
+            eventListenerSuccess: events.eventSuccess,
             eventListenerFail: events.eventFail
         };
 
@@ -104,6 +104,7 @@ define({
     },
 
     generateActionEvents() {
+        const self = this;
         const _id = this.generateUniqueId();
         const eventName = `event_${_id}`;
         const eventNameFail = `${eventName}_fail`;
@@ -115,7 +116,7 @@ define({
                 if (action !== null && action.hasOwnProperty('result')) {
                     console.log('success');
                     console.log(action.result);
-                    amplify.unsubscribe(action.eventListener);
+                    amplify.unsubscribe(action.eventListenerSuccess);
                 }
             },
 			1
@@ -127,7 +128,8 @@ define({
                 if (actionFail !== null && actionFail.hasOwnProperty('error')) {
                     console.log('error');
                     console.log(actionFail.error);
-                    amplify.unsubscribe(action.eventListenerFail);
+                    amplify.unsubscribe(actionFail.eventListenerFail);
+                    self.log(`ERROR action id: ${actionFail.id} Error: ${actionFail.error}`);
                 }
             },
 			1
