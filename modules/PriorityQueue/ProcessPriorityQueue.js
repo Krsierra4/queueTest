@@ -8,6 +8,9 @@ coned.utilities.processPriorityQueue = {
   actionStoreName: 'priorityActionQueue',
   tryAgainCount: 0,
 
+  /**
+   * Creates a new MaxPriorityQueue instance and check pending actions
+   */
   init: function () {
     if (this._priorityQueue !== null) return;
     this._priorityQueue = new MaxPriorityQueue({
@@ -18,10 +21,18 @@ coned.utilities.processPriorityQueue = {
     this.tryAgainCount = 0;
   },
 
+  /**
+   * Returns a sorted queue from highest to lowest priority
+   * @returns {array}
+   */
   getQueue: function () {
     return this._priorityQueue.toArray().map(el => el.element);
   },
 
+  /**
+   * Adds an element to the queue
+   * @param {object} element
+   */
   enqueue: function (element) {
     if (element.hasOwnProperty('priority')) {
       this._priorityQueue = this._priorityQueue.enqueue(element);
@@ -29,10 +40,18 @@ coned.utilities.processPriorityQueue = {
     }
   },
 
+  /**
+   * @returns {boolean}
+   */
   isEmpty: function () {
     return this._priorityQueue.isEmpty();
   },
 
+  /**
+   * Compare the action typer and return a handler
+   * @param {object} action 
+   * @returns {any}
+   */
   getCommand: function (action) {
     if (!action || !action.type) throw ('Invalid action provided');
     let handler = null;
@@ -47,7 +66,12 @@ coned.utilities.processPriorityQueue = {
     }
     return handler;
   },
-
+  
+  /**
+   * Execute the action handler
+   * @param {object} action
+   * @returns {Promise}
+   */
   _processAction: function (action) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -60,7 +84,13 @@ coned.utilities.processPriorityQueue = {
       }
     });
   },
+
   //! devolver resultado o error directos
+  /**
+   * Execute the first element in the queue and send 
+   * the response of the action through amplify events
+   * @returns {Promise}
+   */
   processAction: function () {
     return new Promise(async (resolve, reject) => {
       let {
@@ -96,6 +126,11 @@ coned.utilities.processPriorityQueue = {
       }
     });
   },
+
+  /**
+   * Execute all the action in the queue
+   * @async
+   */
   processAll: async function () {
     await this.processAction();
     if (this._priorityQueue !== null && !this._priorityQueue.isEmpty()) {
@@ -103,29 +138,50 @@ coned.utilities.processPriorityQueue = {
     }
   },
 
+  /**
+   * Save current queue in the kony.store
+   */
   saveCurrentQueue: function () {
     const currentQueue = this.getQueue();
     kony.store.setItem(this.queueStoreName, currentQueue);
   },
 
+  /**
+   * Save the action that is being executed
+   * @param {object} action 
+   */
   saveCurrentAction: function (action) {
     kony.store.setItem(this.actionStoreName, action);
   },
 
+  /**
+   * Remove action form the store
+   */
   clearStoredCurrentAction: function () {
     kony.store.removeItem(this.actionStoreName);
   },
 
+  /**
+   * Return the saved queue
+   * @returns {array}
+   */
   getStoredQueue: function () {
     const storedQueue = kony.store.getItem(this.queueStoreName) || [];
     return storedQueue;
   },
 
+  /**
+   * Return the saved action
+   * @returns {object}
+   */
   getStoredAction: function () {
     const storedAction = kony.store.getItem(this.actionStoreName) || {};
     return storedAction;
   },
 
+  /**
+   * Enqueue if exist saved actions 
+   */
   checkPendingQueue: function () {
     const data = this.getStoredQueue();
     if (Array.isArray(data) && data.length > 0) {
@@ -135,6 +191,10 @@ coned.utilities.processPriorityQueue = {
     }
   },
 
+  /**
+   * If the action saved has status inProgress
+   * the priority is changed to put it in front of the queue
+   */
   checkPendingAction: function () {
     const action = this.getStoredAction();
     if (action !== null && action.hasOwnProperty('status') && action.hasOwnProperty('priority')) {
@@ -145,6 +205,10 @@ coned.utilities.processPriorityQueue = {
     }
   },
 
+  /**
+   * Try running the action 3 times if there is an error
+   * @param {object} action 
+   */
   tryAgainAction: async function (action) {
     try {
       if (this.tryAgainCount < 3) {
