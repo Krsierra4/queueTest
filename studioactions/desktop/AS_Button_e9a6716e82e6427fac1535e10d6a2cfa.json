@@ -11,8 +11,7 @@
 		"contextObj": {
 			"type": "forms",
 			"platform": "",
-			"KUID": "dba8bcb5003b48eb858d647260b2d19a",
-			"name": "Form1"
+			"KUID": "dba8bcb5003b48eb858d647260b2d19a"
 		},
 		"language": "js",
 		"actions": [
